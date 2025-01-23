@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import PruductsList from './components/ui/ProductsList.vue'
+import AppInput from './components/ui/AppInput.vue';
+import ProductsList from './components/ui/ProductsList.vue';
 </script>
 
 <template>
   <main>
     <div class="container">
-      <PruductsList />
+      <AppInput />
+      <ProductsList />
     </div>
   </main>
 </template>

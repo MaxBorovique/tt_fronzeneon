@@ -1,32 +1,27 @@
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+import { ProductService, type Product } from '../business/productService'
+import ProductItem from './ProductItem.vue';
+
+const products = ref<Product[]>([])
+const productService = new ProductService()
+
+onMounted(async () => {
+  products.value = await productService.fetchProducts();
+  console.log(products.value);
+})
+</script>
+
 <template>
   <div>
     <section>
       <ul>
-        <li>
-          <article>
-            <div class="image-container">
-              <img src="#" alt="product image" />
-            </div>
-            <div class="content-container">
-              <h2>Title</h2>
-              <p class="description">Description</p>
-              <div class="discount">
-                <span>Discount 15.58%</span>
-                <span>BBBrand</span>
-              </div>
-              <div class="price">
-                <span>$ 14</span>
-                <span> rating</span>
-                <span>category</span>
-              </div>
-            </div>
-          </article>
+        <li v-for="product in products" :key="product.id">
+          <ProductItem  :product="product" />
         </li>
       </ul>
     </section>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>
