@@ -5,21 +5,22 @@ defineProps<{ product: Product }>()
 
 <template>
   <article class="product-item">
-    <div class="product-item__container">
-      <div class="image-container">
-        <img :src="product.thumbnail" alt="product image" />
+    <div class="image-container">
+      <img class="image" :src="product.thumbnail" alt="product image" />
+    </div>
+    <div class="content-container">
+      <div class="product-info">
+        <span class="brand">{{ product.brand }}</span>
+        <span class="category">{{ product.category }}</span>
       </div>
-      <div class="content-container">
-        <h2 class="title">{{ product.title }}</h2>
-        <p class="description">{{ product.description }}</p>
-        <div class="product-meta">
-          <span class="discount">Discount {{ product.discountPercentage }}</span>
-          <span class="brand">{{ product.brand }}</span>
-        </div>
-        <div class="product-info">
+      <h2 class="title">{{ product.title }}</h2>
+      <p class="description">{{ product.description }}</p>
+
+      <div class="product-meta">
+        <span class="rating"> {{ product.rating }}</span>
+        <div class="pricing">
+          <span class="discount">Discount {{ product.discountPercentage }}%</span>
           <span class="price">$ {{ product.price }}</span>
-          <span class="rating"> {{ product.rating }}</span>
-          <span class="category">{{ product.category }}</span>
         </div>
       </div>
     </div>
@@ -29,36 +30,107 @@ defineProps<{ product: Product }>()
 <style scoped>
 .product-item {
   display: flex;
-  border: 1px solid red;
-  font-family: 'Playfair Display', serif;
-  color: var(--c-black);
+  justify-content: space-between;
+  gap: 1rem;
+  height: 200px;
+  background-color: var(--c-black);
+  border-radius: 12px;
 }
 
-.product-item__container {
-  display: flex;
+.image-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  object-fit: cover;
 }
 
 .content-container {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  max-width: 450px;
+  padding: 16px;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--c-primary);
+  line-height: 22px;
+}
+.category {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  color: var(--c-secondary);
+  text-transform: capitalize;
+  background-color: var(--c-primary);
+  padding: 4px 8px;
+  border-radius: 100px;
+  color: var(--c-black);
 }
 
 .title {
-  font-size: 18px;
-  font-style: bold;
-  padding-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--c-white);
+  line-height: 33px;
 }
 
 .description {
-  font-size: 14px;
-  padding-top: 1rem;
-  color: var(--c-gray);
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 400px;
+  overflow: hidden;
+  color: var(--c-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+}
+.pricing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.discount {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--c-gray);
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--c-white);
+}
+
+.rating {
+  font-style: 1rem;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--c-gray);
+}
+
+.rating::before {
+  content: '⭐️';
+  color: var(--c-primary);
 }
 </style>

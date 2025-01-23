@@ -5,14 +5,17 @@
 }
 
 :root {
-  --c-black: #01161E;
-  --c-white: #E9ECF5;
-  --c-primary: #F1DB4B;
-  --c-gray: #686963;
+  --c-body-bg: #1c1c1c;
+  --c-black: #262626;
+  --c-white: #FFFFFF;
+  --c-primary: #F9DF36;
+  --c-secondary: #9B9B9B;
+  --c-gray: #C5C5C5;
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  background-color: #cdd3ce;
+  background-color: var(--c-body-bg);
+  font-family: 'Nunito', serif;
 }

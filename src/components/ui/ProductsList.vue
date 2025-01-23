@@ -8,7 +8,6 @@ const productService = new ProductService()
 
 onMounted(async () => {
   products.value = await productService.fetchProducts();
-  console.log(products.value);
 })
 </script>
 
@@ -26,13 +25,12 @@ onMounted(async () => {
 
 <style scoped>
 .products-list {
-  max-width: 800px;
+  max-width: 1000px;
+  max-height: 800px;
+  overflow-y: hidden;
 }
 .list-item {
+  padding-bottom: 1rem;
   list-style: none;
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 1px solid var(--c-gray);
-  border-radius: 5px;
 }
 </style>
