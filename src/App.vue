@@ -14,18 +14,16 @@ import ProductsList from './components/ui/ProductsList.vue';
 
 <style scoped>
 main {
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  width: 100%;
+  width: 100vw;
   height: 100%;
 }
 .container {
   max-width: 1248px;
+  margin: 0 auto;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-self: center;
+  justify-content: center;
   align-items: center;
 }
 </style>

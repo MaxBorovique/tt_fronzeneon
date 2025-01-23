@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --c-black: #01161E;
+  --c-white: #E9ECF5;
+  --c-primary: #F1DB4B;
+  --c-gray: #686963;
+}
+
 body {
   width: 100vw;
   height: 100vh;

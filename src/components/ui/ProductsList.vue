@@ -14,9 +14,9 @@ onMounted(async () => {
 
 <template>
   <div>
-    <section>
+    <section class="products-list">
       <ul>
-        <li v-for="product in products" :key="product.id">
+        <li class="list-item" v-for="product in products" :key="product.id">
           <ProductItem  :product="product" />
         </li>
       </ul>
@@ -24,4 +24,15 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.products-list {
+  max-width: 800px;
+}
+.list-item {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--c-gray);
+  border-radius: 5px;
+}
+</style>
