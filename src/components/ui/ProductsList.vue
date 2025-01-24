@@ -1,21 +1,37 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import ProductItem from '../business/ProductItem.vue'
 import type { Product } from '@/types/product'
-import { CONTAINER_HEIGHT, ITEM_HEIGHT } from '../../../vars'
-import { useVirtualList } from '@/hooks/useVirtualList'
+import { CONTAINER_HEIGHT, ITEM_HEIGHT } from '../../../vars';
 
 const props = defineProps<{ products: Product[] }>()
 
-const { containerRef, topPadding, bottomPadding, visibleItems, onScroll } = useVirtualList(
-  props.products,
-  CONTAINER_HEIGHT,
-  ITEM_HEIGHT,
+const visibleCount = Math.ceil(CONTAINER_HEIGHT / ITEM_HEIGHT)
+
+const containerRef = ref<HTMLDivElement | null>(null)
+const scrollTop = ref(0)
+
+const startIndex = computed(() => Math.floor(scrollTop.value / ITEM_HEIGHT))
+const endIndex = computed(() => startIndex.value + visibleCount)
+const visibleItems = computed(() =>
+  props.products.slice(startIndex.value, Math.min(endIndex.value, props.products.length)),
 )
+
+const topPadding = computed(() => startIndex.value * ITEM_HEIGHT)
+const bottomPadding = computed(
+  () =>
+    props.products.length * ITEM_HEIGHT - topPadding.value - visibleItems.value.length * ITEM_HEIGHT,
+)
+
+const onScroll = () => {
+  if (containerRef.value) {
+    scrollTop.value = containerRef.value.scrollTop
+  }
+}
 
 onMounted(() => {
   if (containerRef.value) {
-    containerRef.value.scrollTop = 0
+    scrollTop.value = containerRef.value.scrollTop
   }
 })
 </script>
@@ -54,6 +70,7 @@ onMounted(() => {
 }
 .list-item {
   list-style: none;
+
 }
 .fade-slow-enter-active,
 .fade-slow-leave-active {

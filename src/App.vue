@@ -9,12 +9,10 @@ import NotFound from './components/ui/NotFound.vue'
 const products = ref<Product[]>([])
 const productService = new ProductService()
 const searchData = ref<string>('')
-const filteredProducts = computed(() => {
-  if (!searchData.value) {
-    return products.value
-  }
-  return productService.filterProductsByNames(products.value, searchData.value)
-})
+
+const filteredProducts = computed(() =>
+  productService.filterProductsByNames(products.value, searchData.value)
+)
 
 onMounted(async () => {
   products.value = await productService.fetchProducts()
