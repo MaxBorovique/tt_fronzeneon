@@ -27,7 +27,7 @@ defineProps<{ product: Product }>()
   </article>
 </template>
 
-<style scoped>
+<style lang="css" scoped>
 .product-item {
   display: flex;
   justify-content: space-between;

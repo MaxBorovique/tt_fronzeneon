@@ -1,3 +1,4 @@
+import { BASE_URL } from './../../../vars'
 export interface Product {
   id: number
   title: string
@@ -12,10 +13,17 @@ export interface Product {
 
 export class ProductService {
   async fetchProducts(): Promise<Product[]> {
-    return await fetch('https://dummyjson.com/products?limit=100')
+    return await fetch(BASE_URL)
       .then((res) => res.json())
       .then((data) => {
         return data.products
       })
+  }
+
+  filterProductsByNames(products: Product[], data: string): Product[] {
+    if(!data.length) return products;
+    return products.filter((product) =>
+      product.title.toLowerCase().trim().includes(data.toLowerCase().trim()),
+    )
   }
 }

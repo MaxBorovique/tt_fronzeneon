@@ -1,14 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { ProductService, type Product } from '../business/productService'
+import type { Product } from '../business/productService';
 import ProductItem from './ProductItem.vue';
-
-const products = ref<Product[]>([])
-const productService = new ProductService()
-
-onMounted(async () => {
-  products.value = await productService.fetchProducts();
-})
+defineProps<{ products: Product[]}>();
 </script>
 
 <template>
@@ -23,7 +16,7 @@ onMounted(async () => {
   </div>
 </template>
 
-<style scoped>
+<style lang="css" scoped>
 .products-list {
   max-width: 1000px;
   max-height: 800px;
@@ -32,5 +25,7 @@ onMounted(async () => {
 .list-item {
   padding-bottom: 1rem;
   list-style: none;
+  padding: 1.5rem;
+  padding-bottom: 0;
 }
 </style>
