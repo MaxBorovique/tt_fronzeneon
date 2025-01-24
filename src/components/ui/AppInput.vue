@@ -1,10 +1,12 @@
 <template>
   <div class="input-contaner">
-    <label class="label">
+    <label for="product-search" class="label">
       <input
+      id="product-search"
       class="input"
-      type="text"
+      type="search"
       placeholder="Search for products"
+      role="searchbox"
       :value="modelValue"
       @input="updateValue"
       />

@@ -1,28 +1,32 @@
-import { BASE_URL } from './../../../vars'
-export interface Product {
-  id: number
-  title: string
-  description: string
-  category: string
-  price: number
-  discountPercentage: number
-  rating: number
-  brand: string
-  thumbnail: string
-}
+import { ref } from 'vue'
+import { BASE_URL, LIMIT } from '../../../vars'
+import type { Product } from '@/types/product'
+
 
 export class ProductService {
+  private products = ref<Product[]>([])
+
   async fetchProducts(): Promise<Product[]> {
-    return await fetch(BASE_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        return data.products
-      })
+    try {
+      const response = await fetch(`${BASE_URL}/products?limit=${LIMIT}`)
+      if (!response.ok) {
+        throw new Error('Failed to fetch products')
+      }
+      const data = await response.json()
+      const fetchedProducts = data.products || []
+
+      this.products.value = fetchedProducts
+
+      return fetchedProducts
+    } catch (error) {
+      console.error(error)
+      return []
+    }
   }
 
   filterProductsByNames(products: Product[], data: string): Product[] {
     return products.filter((product) =>
-      product.title.toLowerCase().trim().includes(data.toLowerCase().trim()),
+      product.title.toLowerCase().includes(data.toLowerCase().trim()),
     )
   }
 }

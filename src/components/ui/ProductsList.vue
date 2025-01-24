@@ -1,40 +1,23 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import type { Product } from '../business/productService';
-import ProductItem from './ProductItem.vue';
+import { onMounted } from 'vue'
+import ProductItem from '../business/ProductItem.vue'
+import type { Product } from '@/types/product'
+import { CONTAINER_HEIGHT, ITEM_HEIGHT } from '../../../vars'
+import { useVirtualList } from '@/hooks/useVirtualList'
 
-const props = defineProps<{ products: Product[] }>();
+const props = defineProps<{ products: Product[] }>()
 
-const itemHeight = 210;
-const containerHeight = 700;
-const visibleCount = Math.ceil(containerHeight / itemHeight);
-
-const containerRef = ref<HTMLDivElement | null>(null);
-const scrollTop = ref(0);
-
-const startIndex = computed(() => Math.floor(scrollTop.value / itemHeight));
-const endIndex = computed(() => startIndex.value + visibleCount);
-const visibleItems = computed(() =>
-  props.products.slice(startIndex.value, Math.min(endIndex.value, props.products.length))
-);
-
-
-const topPadding = computed(() => startIndex.value * itemHeight);
-const bottomPadding = computed(
-  () => props.products.length * itemHeight - topPadding.value - visibleItems.value.length * itemHeight
-);
-
-const onScroll = () => {
-  if (containerRef.value) {
-    scrollTop.value = containerRef.value.scrollTop;
-  }
-};
+const { containerRef, topPadding, bottomPadding, visibleItems, onScroll } = useVirtualList(
+  props.products,
+  CONTAINER_HEIGHT,
+  ITEM_HEIGHT,
+)
 
 onMounted(() => {
   if (containerRef.value) {
-    scrollTop.value = containerRef.value.scrollTop;
+    containerRef.value.scrollTop = 0
   }
-});
+})
 </script>
 
 <template>
@@ -42,16 +25,16 @@ onMounted(() => {
     class="products-list"
     ref="containerRef"
     @scroll="onScroll"
-    style="height: 800px; overflow-y: auto;"
+    style="height: 800px; overflow-y: auto"
   >
     <div :style="{ height: topPadding + 'px' }"></div>
 
-    <transition-group name="fade" tag="ul" class="products-list">
+    <transition-group name="fade-slow" tag="ul" class="products-list">
       <li
         class="list-item"
         v-for="product in visibleItems"
         :key="product.id"
-        :style="{ height: itemHeight + 'px' }"
+        :style="{ height: ITEM_HEIGHT + 'px' }"
       >
         <ProductItem :product="product" />
       </li>
@@ -72,15 +55,17 @@ onMounted(() => {
 .list-item {
   list-style: none;
 }
-
-.fade-enter-active, .fade-leave-active {
-  transition: all 0.5s ease;
+.fade-slow-enter-active,
+.fade-slow-leave-active {
+  transition: opacity 0.3s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-slow-enter-from,
+.fade-slow-leave-to {
   opacity: 0;
-  transform: translateY(-20px);
 }
 
+.fade-slow-move {
+  transition: transform 0.3s ease;
+}
 </style>
