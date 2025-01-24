@@ -20,7 +20,7 @@ defineProps<{ product: Product }>()
         <span class="rating"> {{ product.rating }}</span>
         <div class="pricing">
           <span class="discount">Discount {{ product.discountPercentage }}%</span>
-          <span class="price">$ {{ product.price }}</span>
+          <span class="price">&#36; {{ product.price }}</span>
         </div>
       </div>
     </div>
@@ -31,8 +31,9 @@ defineProps<{ product: Product }>()
 .product-item {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem;
   height: 200px;
+  width: 100%;
   background-color: var(--c-black);
   border-radius: 12px;
 }

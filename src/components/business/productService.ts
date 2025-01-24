@@ -21,7 +21,6 @@ export class ProductService {
   }
 
   filterProductsByNames(products: Product[], data: string): Product[] {
-    if(!data.length) return products;
     return products.filter((product) =>
       product.title.toLowerCase().trim().includes(data.toLowerCase().trim()),
     )

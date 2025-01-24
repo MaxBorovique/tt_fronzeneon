@@ -36,13 +36,12 @@ main {
   height: 100%;
 }
 .container {
-  max-width: 1248px;
-  margin: 0 auto;
-  height: 100%;
+  width: 700px;
+  margin: auto;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 100px;
 }
 </style>
