@@ -5,13 +5,12 @@ import ProductItem from './ProductItem.vue';
 
 const props = defineProps<{ products: Product[] }>();
 
-// Фіксована висота одного елемента (в пікселях)
-const itemHeight = 220; // висота `product-item` + відступи
-const containerHeight = 800; // висота видимого контейнера
-const visibleCount = Math.ceil(containerHeight / itemHeight); // кількість елементів, які видно одночасно
+const itemHeight = 210;
+const containerHeight = 700;
+const visibleCount = Math.ceil(containerHeight / itemHeight);
 
 const containerRef = ref<HTMLDivElement | null>(null);
-const scrollTop = ref(0); // позиція скролу
+const scrollTop = ref(0);
 
 const startIndex = computed(() => Math.floor(scrollTop.value / itemHeight));
 const endIndex = computed(() => startIndex.value + visibleCount);
@@ -19,7 +18,7 @@ const visibleItems = computed(() =>
   props.products.slice(startIndex.value, Math.min(endIndex.value, props.products.length))
 );
 
-// Висота "пустого простору" перед і після видимих елементів
+
 const topPadding = computed(() => startIndex.value * itemHeight);
 const bottomPadding = computed(
   () => props.products.length * itemHeight - topPadding.value - visibleItems.value.length * itemHeight
@@ -45,10 +44,8 @@ onMounted(() => {
     @scroll="onScroll"
     style="height: 800px; overflow-y: auto;"
   >
-    <!-- Пустий простір перед видимими елементами -->
     <div :style="{ height: topPadding + 'px' }"></div>
 
-    <!-- Видимі елементи -->
     <transition-group name="fade" tag="ul" class="products-list">
       <li
         class="list-item"
@@ -60,7 +57,6 @@ onMounted(() => {
       </li>
     </transition-group>
 
-    <!-- Пустий простір після видимих елементів -->
     <div :style="{ height: bottomPadding + 'px' }"></div>
   </section>
 </template>
