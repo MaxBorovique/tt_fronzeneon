@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import ProductItem from '../business/ProductItem.vue'
 import type { Product } from '@/types/product'
 import { CONTAINER_HEIGHT, ITEM_HEIGHT } from '../../../vars';
+import { debounce } from '@/helpers/debounce';
 
 const props = defineProps<{ products: Product[] }>()
 
@@ -23,11 +24,14 @@ const bottomPadding = computed(
     props.products.length * ITEM_HEIGHT - topPadding.value - visibleItems.value.length * ITEM_HEIGHT,
 )
 
-const onScroll = () => {
+const handleScroll = () => {
   if (containerRef.value) {
-    scrollTop.value = containerRef.value.scrollTop
+    scrollTop.value = containerRef.value.scrollTop;
   }
-}
+};
+
+
+const onScroll = debounce(handleScroll, 50);
 
 onMounted(() => {
   if (containerRef.value) {
