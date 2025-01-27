@@ -1,39 +1,83 @@
-# tt_frozeneon
+# Vue 3 Product Search Application
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple Vue 3 application that demonstrates product search functionality with virtual scrolling. Built with Vue 3, TypeScript, and Vite.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Real-time product search with debounced input
+- Virtual scrolling for efficient rendering of large lists
+- Responsive design
+- TypeScript support
+- Modern development setup with Vite
 
-## Type Support for `.vue` Imports in TS
+## Prerequisites
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Node.js (latest LTS version recommended)
+- npm or yarn
 
-## Customize configuration
+## Installation
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```bash
+# Clone the repository
+git clone [your-repository-url]
 
-## Project Setup
+# Navigate to project directory
+cd tt_frozeneon
 
-```sh
+# Install dependencies
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## Development
 
-```sh
+```bash
+# Start development server
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+# Type checking
+npm run type-check
 
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
+# Lint code
 npm run lint
+
+# Format code
+npm run format
 ```
+
+## Build
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Deployment
+
+The project is configured for deployment to GitHub Pages:
+
+```bash
+npm run deploy
+```
+
+## Project Structure
+
+- `src/` - Source files
+  - `components/` - Vue components
+  - `services/` - API and business logic
+  - `types/` - TypeScript type definitions
+  - `helpers/` - Utility functions
+
+## Technologies
+
+- Vue 3
+- TypeScript
+- Vite
+- ESLint
+- Prettier
+
+## License
+
+This project is licensed under the MIT License.
