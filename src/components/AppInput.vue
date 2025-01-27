@@ -15,15 +15,17 @@
 </template>
 
 <script setup lang="ts">
+import { debounce } from '@/helpers/debounce';
+
 defineProps<{
   modelValue: string;
 }>()
 const emit = defineEmits(['update:modelValue']);
 
-const updateValue = (event: Event) => {
+const updateValue = debounce((event: Event) => {
   const target = event.target as HTMLInputElement;
   emit('update:modelValue', target.value);
-}
+}, 300);
 </script>
 
 <style lang="css" scoped>

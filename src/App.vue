@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import type { Product } from './types/product';
-import { debounce } from './helpers/debounce';
 import { ProductService } from './services/productService';
 import NotFound from './components/NotFound.vue';
 import ProductsList from './components/ProductsList.vue';
@@ -9,10 +8,6 @@ import AppInput from './components/AppInput.vue';
 
 const products = ref<Product[]>([]);
 const searchData = ref<string>('');
-
-const updateSearch = debounce((value: string) => {
-  searchData.value = value;
-}, 300);
 
 const productService = new ProductService();
 
@@ -28,7 +23,7 @@ onMounted(async () => {
 <template>
   <main>
     <div class="container">
-      <AppInput v-model="searchData" @input="updateSearch" />
+      <AppInput v-model="searchData" />
       <NotFound v-if="!filteredProducts.length" />
       <ProductsList v-else :products="filteredProducts" />
     </div>
