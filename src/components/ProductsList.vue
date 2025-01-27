@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import ProductItem from '../business/ProductItem.vue'
-import type { Product } from '@/types/product'
-import { CONTAINER_HEIGHT, ITEM_HEIGHT } from '../../../vars';
+import { ITEM_HEIGHT, CONTAINER_HEIGHT } from '../../vars'
 import { debounce } from '@/helpers/debounce';
+import type { Product } from '@/types/product';
+import ProductItem from './ProductItem.vue';
 
 const props = defineProps<{ products: Product[] }>()
 

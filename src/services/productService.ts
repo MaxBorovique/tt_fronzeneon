@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { BASE_URL, LIMIT } from '../../../vars'
+import { BASE_URL, LIMIT } from '../../vars'
 import type { Product } from '@/types/product'
 
 

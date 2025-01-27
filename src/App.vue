@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
-import AppInput from './components/ui/AppInput.vue';
-import ProductsList from './components/ui/ProductsList.vue';
-import { ProductService } from './components/business/productService';
 import type { Product } from './types/product';
-import NotFound from './components/ui/NotFound.vue';
 import { debounce } from './helpers/debounce';
+import { ProductService } from './services/productService';
+import NotFound from './components/NotFound.vue';
+import ProductsList from './components/ProductsList.vue';
+import AppInput from './components/AppInput.vue';
 
 const products = ref<Product[]>([]);
 const searchData = ref<string>('');
