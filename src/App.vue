@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import type { Product } from './types/product';
 import { ProductService } from './services/productService';
 import NotFound from './components/NotFound.vue';
@@ -18,6 +18,18 @@ const filteredProducts = computed(() =>
 onMounted(async () => {
   products.value = await productService.fetchProducts();
 });
+
+
+watch(filteredProducts, () => {
+  const listContainer = document.querySelector('.products-list-container');
+  if (listContainer) {
+    listContainer.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+});
+
 </script>
 
 <template>
